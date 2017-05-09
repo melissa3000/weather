@@ -32,6 +32,9 @@ def hello_monkey():
     resp = MessagingResponse().message(msg)
     return str(resp)
 
+@app.route("/error")
+def error():
+    raise Exception("Error!")
 
 
 if __name__ == "__main__":
