@@ -7,7 +7,7 @@ import os
 import urllib2
 import json
 
-wunderground_key = os.environ.get('wunderground_key')
+wunderground_key = os.environ.get("wunderground_key")
 
 
 
