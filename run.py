@@ -31,6 +31,6 @@ def hello_monkey():
 
 if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 5000))
-    # DEBUG = "NO_DEBUG" not in os.environ
+    DEBUG = "NO_DEBUG" not in os.environ
 
-    app.run(host="0.0.0.0", port=PORT, debug=True)
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
