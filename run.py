@@ -22,6 +22,8 @@ def hello_monkey():
     # turn the string into an object
     parsed_json = json.loads(json_string)
 
+    print json_string
+
     location = parsed_json['location']['city']
 
     temp_f = parsed_json['current_observation']['temp_f']

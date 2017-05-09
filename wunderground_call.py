@@ -37,3 +37,4 @@ def get_weather():
     f.close()
     return msg
 
+print get_weather()
