@@ -6,15 +6,17 @@ from twilio.twiml.messaging_response import MessagingResponse
 import os
 import urllib2
 import json
+from boto.s3.connection import S3Connection
+s3 = S3Connection(os.environ['wunderground_key'])
 
-wunderground_key = os.environ.get("wunderground_key")
+
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
     """Respond to incoming calls with a simple text message."""
-    f = urllib2.urlopen('http://api.wunderground.com/api/' + wunderground_key + '/geolookup/conditions/q/CA/San_Francisco.json')
+    f = urllib2.urlopen('http://api.wunderground.com/api/' + s3 + '/geolookup/conditions/q/CA/San_Francisco.json')
     json_string = f.read()
 
     # turn the string into an object
