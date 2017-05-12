@@ -1,5 +1,5 @@
 
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 from twilio.twiml.messaging_response import MessagingResponse
 import os
 import urllib2
@@ -11,16 +11,25 @@ wunderground_key = os.environ.get("wunderground_key")
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
-    """Respond to incoming calls with a simple text message."""
+
+@app.route('/', methods=['GET'])
+def index():
+    """Homepage allows users to log in"""
+
+    return render_template("homepage.html")
+
+
+
+@app.route('/weather', methods=['GET', 'POST'])
+def weather_check():
+    """Respond to incoming calls with a text of the SF weather and expected rain."""
     f = urllib2.urlopen('http://api.wunderground.com/api/' + wunderground_key + '/geolookup/conditions/q/CA/San_Francisco.json')
     json_string = f.read()
 
     # turn the string into an object
     parsed_json = json.loads(json_string)
 
-    print json_string
+    # print json_string
 
     location = parsed_json['location']['city']
 
@@ -33,6 +42,8 @@ def hello_monkey():
 
     resp = MessagingResponse().message(msg)
     return str(resp)
+
+
 
 @app.route("/error")
 def error():
